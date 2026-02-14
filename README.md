@@ -16,12 +16,18 @@ It integrates two major AI providers: **Hugging Face** and **Cohere**.
 
 ## 🛠️ Setup
 
-1. **Install Dependencies**:
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/ai_chatting.git
+   cd ai_chatting
+   ```
+
+2. **Install Dependencies**:
    ```bash
    composer install
    ```
 
-2. **Configure Environment**:
+3. **Configure Environment**:
    Copy `.env.example` to `.env` and configure your API keys:
    ```env
    # Hugging Face Configuration
@@ -35,12 +41,12 @@ It integrates two major AI providers: **Hugging Face** and **Cohere**.
    COHERE_URL=https://api.cohere.com/v2/chat
    ```
 
-3. **Generate App Key**:
+4. **Generate App Key**:
    ```bash
    php artisan key:generate
    ```
 
-4. **Run Server**:
+5. **Run Server**:
    ```bash
    php artisan serve
    ```
