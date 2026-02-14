@@ -1,0 +1,173 @@
+{
+    "info": {
+        "_postman_id": "8b9cad0e-1f20-418c-8b86-3f665fbe75a6",
+        "name": "AI Chatting - Laravel Resolver",
+        "description": "Postman collection for testing Hugging Face and Cohere AI Chat APIs in the ai_chatting project.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Hugging Face Chat (Mistral)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"message\": \"Base table or view not found: 1146 Table 'ai_chatting.sessions' doesn't exist\",\n    \"history\": []\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8000/api/chat",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "api",
+                        "chat"
+                    ]
+                },
+                "description": "Standard chat endpoint using Hugging Face router."
+            },
+            "response": [
+                {
+                    "name": "Hugging Face Error Log Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"message\": \"Base table or view not found: 1146 Table 'ai_chatting.sessions' doesn't exist\",\n    \"history\": []\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/api/chat",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "chat"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"The error **`Base table or view not found: 1146 Table 'ai_chatting.sessions' doesn't exist`** in Laravel means that your application cannot find a database table named **`sessions`** in the **`ai_chatting`** database (or schema). This typically happens when:\\n\\n### **Possible Causes & Solutions**\\n1. **Missing Migrations or Database Table**\\n   - Laravel uses a `sessions` table by default for storing session data.\\n   - If you haven't run the default Laravel migrations, this table won't exist.\\n   - **Fix:** Run the missing migrations:\\n     ```bash\\n     php artisan migrate\\n     ```\\n   - If you're using a custom session driver (like Redis, Memcached, or database with a different table name), ensure the table is properly defined in `config/session.php`.\\n\\n2. **Incorrect Database Schema in `config/session.php`**\\n   - Laravel stores sessions in the database by default (if `SESSION_DRIVER=database` in `.env`).\\n   - The `SESSIONS_TABLE` in `config/session.php` might be pointing to the wrong table.\\n   - **Check:** Open `config/session.php` and look for:\\n     ```php\\n     'connection' => env('DB_CONNECTION', 'mysql'),\\n     'table' => 'sessions',\\n     'store' => 'default',\\n     ```\\n   - If your sessions table has a different name (e.g., `session`), update the config:\\n     ```php\\n     'table' => 'session',\\n     ```\\n\\n3. **Custom Session Table Not Created**\\n   - If you're using a custom session table (e.g., `custom_sessions`), ensure:\\n     - The table exists in the database.\\n     - The migration for it was run.\\n   - **Fix:** Run the migration with the correct table name or manually create the table.\\n\\n4. **Running in Wrong Database**\\n   - Your `.env` file might specify a different database connection (e.g., `DB_DATABASE=ai_chatting` is not set correctly).\\n   - **Check:** Verify `.env`:\\n     ```ini\\n     DB_CONNECTION=mysql\\n     DB_DATABASE=ai_chatting\\n     DB_USERNAME=your_username\\n     DB_PASSWORD=your_password\\n     ```\\n   - Then run:\\n     ```bash\\n     php artisan config:clear\\n     php artisan migrate\\n     ```\\n\\n5. **Using Redis/Memcached but Session Table Exists in MySQL**\\n   - If you're using Redis (`SESSION_DRIVER=redis`) but still want a `sessions` table in the database (for debugging), set:\\n     ```ini\\n     SESSION_DRIVER=file  # or 'database' if you want to ensure the table exists\\n     ```\\n   - Then clear cached config and run migrations again.\\n\\n6. **Table Name Case Sensitivity**\\n   - Some databases (like MySQL on Linux) are case-sensitive.\\n   - Ensure the table name in `config/session.php` matches exactly (e.g., `sessions` vs `Sessions`).\\n\\n7. **Schema Prefix Issue**\\n   - If your Laravel app uses a schema prefix (e.g., `prefix_`) in `config/database.php`, the sessions table name should include it:\\n     ```php\\n     'table' => 'prefix_sessions',\\n     ```\\n\\n### **Next Steps**\\n- **Check if the table exists:**\\n  ```bash\\n  php artisan db:show sessions\\n  ```\\n- **If missing, run migrations:**\\n  ```bash\\n  php artisan migrate:status  # Check which migrations are pending\\n  php artisan migrate      # Run all pending migrations\\n  ```\\n- **If you’re using a custom session driver**, ensure your database config is correct for the driver you intend to use.\",\n    \"history\": [\n        {\n            \"role\": \"user\",\n            \"content\": \"Base table or view not found: 1146 Table 'ai_chatting.sessions' doesn't exist\"\n        },\n        {\n            \"role\": \"assistant\",\n            \"content\": \"The error **`Base table or view not found: 1146 Table 'ai_chatting.sessions' doesn't exist`** in Laravel means that your application cannot find a database table named **`sessions`** in the **`ai_chatting`** database (or schema). This typically happens when:\\n\\n### **Possible Causes & Solutions**...\"\n        }\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Cohere Chat (Command R)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"message\": \"database.sqlite does not exist. Ensure this is an absolute path to the databas\",\n    \"history\": []\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8000/api/chat-v2",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000",
+                    "path": [
+                        "api",
+                        "chat-v2"
+                    ]
+                },
+                "description": "Chat endpoint using Cohere API v2 with larger model and longer timeout."
+            },
+            "response": [
+                {
+                    "name": "Cohere Error Log Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"message\": \"database.sqlite does not exist. Ensure this is an absolute path to the databas\",\n    \"history\": []\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/api/chat-v2",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "chat-v2"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"When you encounter the error \\\"database.sqlite does not exist,\\\" it typically means that Laravel is unable to locate the SQLite database file at the specified path. By default, Laravel uses a relative path to the database file, which is why it's important to ensure that the path is absolute and points to the correct location.\\n\\nHere's how you can resolve this issue:\\n\\n1. **Check the Database Configuration:**\\n   Open your Laravel project's `.env` file and look for the `DB_DATABASE` variable. By default, it is set to `database.sqlite` for SQLite databases. If you have moved or renamed the database file, you need to update this configuration to match the absolute path to your SQLite database.\\n\\n2. **Provide an Absolute Path:**\\n   Ensure that the path specified in `DB_DATABASE` is an absolute path. An absolute path starts with the root directory, typically represented by a forward slash (`/`) on Unix-based systems (including macOS and Linux) and a backslash (`\\\\`) on Windows.\\n\\n   For example, if your SQLite database file is located in the `storage/databases` directory of your Laravel project, you would set `DB_DATABASE` as follows:\\n\\n   ```\\n   DB_DATABASE=/path/to/your/project/storage/databases/database.sqlite\\n   ```\\n\\n   On Windows, it might look like this:\\n\\n   ```\\n   DB_DATABASE=C:\\\\path\\\\to\\\\your\\\\project\\\\storage\\\\databases\\\\database.sqlite\\n   ```\\n\\n3. **Verify the Path:**\\n   After updating the `.env` file, restart your Laravel application or refresh the environment variables. Then, try accessing your application again. Laravel should now be able to locate the SQLite database file using the absolute path you provided.\\n\\nIf you are still encountering issues, double-check that the database file exists at the specified location and that you have the necessary permissions to access it.\",\n    \"history\": [\n        {\n            \"role\": \"user\",\n            \"content\": \"database.sqlite does not exist. Ensure this is an absolute path to the databas\"\n        },\n        {\n            \"role\": \"assistant\",\n            \"content\": \"When you encounter the error \\\"database.sqlite does not exist,\\\" it typically means that Laravel is unable to locate the SQLite database...\"\n        }\n    ]\n}"
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000",
+            "type": "string"
+        }
+    ]
+}
